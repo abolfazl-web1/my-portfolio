@@ -1,0 +1,165 @@
+/* =========================================
+   ۱. تنظیمات ظرف نگهدارنده (Container)
+========================================= */
+.container {
+  max-width: 1100px; /* حداکثر عرض مجاز برای محتوا. در مانیتورهای بزرگتر از این مقدار کش نمیاد */
+  margin: 0 auto; /* ترفند وسط‌چین کردن جعبه در صفحه: بالا و پایین صفر، چپ و راست اتوماتیک مساوی */
+  padding: 1rem 2rem; /* فاصله داخلی ایمنی تا اگر عرض صفحه کوچیک شد، محتوا به لبه‌های مانیتور نچسبه */
+}
+
+/* هایلایت کردن متن انتخاب شده */
+h1::selection,
+h2::selection{
+  color: #111;
+  background-color: var(--primary-color);
+}
+
+/* =========================================
+   ۲. استایل پایه برای تمام دکمه‌های سایت
+========================================= */
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2.5rem; /* فاصله داخلی: بالا/پایین و چپ/راست */
+  border-radius: 30px; /* گرد کردن گوشه‌های دکمه */
+  text-transform: uppercase; /* تبدیل تمام حروف به بزرگ (حتی اگر تو HTML کوچک نوشته باشی) */
+  font-size: 0.82rem;
+  transition: 0.3s; /* باعث میشه در آینده اگر خواستیم افکت هاور بدیم، نرم و انیمیشنی تغییر کنه */
+}
+
+/* =========================================
+   ۳. استایل دکمه‌های اصلی (مثل دکمه رزومه)
+========================================= */
+
+.btn-primary {
+  background: var(--primary-color);
+  color: #000000;
+  font-weight: 600; /* کمی ضخیم کردن متن دکمه */
+}
+
+/* افزودن افکت هاور (زمانی که موس روی دکمه می‌رود) */
+.btn-primary:hover {
+  background: var(--secondary-color);
+}
+
+/* =========================================
+   ۴. کانتینر بخش معرفی (Hero Section)
+========================================= */
+
+.header-container {
+  display: flex;
+  flex-direction: column; /* المان‌ها رو به جای افقی، زیر هم (عمودی) می‌چینه */
+  /* height: 100%; */
+  align-items: center; /* همه چیز رو در وسط صفحه تراز می‌کنه */
+  justify-content: center;
+  /* این همون راه‌حل مهندسی ماست! 8rem (حدود 128 پیکسل) از بالا فاصله می‌دیم 
+     تا محتوا از زیر منوی ثابت خارج بشه و بیاد پایین */
+  margin-top: 8rem;
+  /* scroll-margin-top: 5rem; */
+  
+  max-width: 1100px;
+  /* ۳. وسط‌چین کردن کل این باکس در صفحه */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+ 
+}
+
+.header-container > div {
+  margin-top: 1rem; /* یک فاصله کوچک برای المان‌های داخل کانتینر */
+}
+
+/* =========================================
+   ۵. تنظیمات متن‌های بخش معرفی
+========================================= */
+
+.content-text {
+  text-align: center; /* تمام متن‌ها وسط‌چین بشن */
+  margin: 1.5rem 0;
+}
+
+.content-text h2 {
+  font-size: 3rem; /* بزرگ و جذاب کردن تیترهای اصلی */
+  line-height: 1.2;
+  transition: 0.2s ease-in-out;
+}
+
+.content-text p {
+  padding: 0.5rem;
+  margin: 0 auto;
+  max-width: 700px; /* یک ترفند عالی برای خوانایی: نمی‌ذاریم خطوط پاراگراف خیلی طولانی بشن */
+}
+
+/* =========================================
+   ۶. دکمه ثانویه (مشکی)
+========================================= */
+
+.btn-secondary {
+  margin: 5px 0;
+  background-color: var(
+    --text-color
+  ); /* استفاده از رنگ تیره برای تضاد با دکمه زرد رزومه */
+  color: var(
+    --bg-primary
+  ); /* رنگ متن دکمه همون رنگ پس‌زمینه سایت (سفید) می‌شه */
+}
+
+/* =========================================
+   ۷. کارت‌های پروژه (Cards)
+========================================= */
+
+.card {
+  padding: 1rem;
+  background: var(--card-background); /* رنگ پس‌زمینه کارت */
+  border-radius: 5px; /* کمی گرد کردن گوشه‌ها */
+  transition: 0.4s ease-in-out;
+  cursor: pointer;                    /* تبدیل نشانگر موس به دست، تا کاربر بفهمه قابل کلیک است */
+  color: var(--text-color);            /* فعلا رنگ متن داخل کارت رو تیره نگه می‌داریم تا روی پس‌زمینه روشن دیده بشه */
+}
+
+
+/* افکت هاور روی کارت */
+.card:hover{
+    box-shadow: inset 0 100px 1000px 10px rgba(0, 0, 0, 0.8);   /* ایجاد یک سایه داخلی (inset) بسیار بزرگ و تیره که کل کارت را تاریک می‌کند */
+    color: #ffffff;
+}
+
+/* وقتی کادر کارت هاور شد، شفافیت اطلاعات (opacity) را از 0 به 1 تبدیل کن */
+.card:hover .project-info{
+    opacity: 1;
+}
+
+/* =========================================
+   پس‌زمینه کارت‌های پروژه (Project Images)
+========================================= */
+
+/* پروژه اول (اولین فرزندی که کلاس card داره) */
+.card:nth-child(1){
+    background: url(../images/projects/project-one.png) center center/cover;
+}
+
+/* پروژه دوم */
+.card:nth-child(2){
+    background: url(../images/projects/project-two.png) center center/cover;
+}
+
+/* پروژه سوم */
+.card:nth-child(3){
+    background: url(../images/projects/project-three.png) center center/cover;
+}
+
+/* پروژه چهارم */
+.card:nth-child(4){
+    background: url(../images/projects/project-four.png) center center/cover;
+}
+
+/* پروژه پنجم */
+.card:nth-child(5){
+    background: url(../images/projects/project-five.png) center center/cover;
+}
+
+/* پروژه ششم */
+.card:nth-child(6){
+    background: url(../images/projects/project-six.png) center center/cover;
+}
+

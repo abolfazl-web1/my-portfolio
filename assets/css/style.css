@@ -1,0 +1,439 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap");
+
+/* ۱. تعریف متغیرهای سراسری سایت */
+:root {
+  --primary-color: #ffcd42; /* رنگ زرد اصلی پروژه */
+  --bg-primary: #ffffff; /* رنگ پس‌زمینه روشن */
+  --text-color: #222222; /* رنگ متن تیره */
+  --secondary-color: #ffd35c; /* رنگ هاور دکمه */
+  --card-background: #f4f4f4; /* رنگ خاکستری بسیار روشن برای کارت‌ها */
+  --border-color: #f4f4f4;
+}
+/* =========================================
+   متغیرهای تم تاریک (Dark Mode)
+========================================= */
+/* وقتی کلاس dark-theme به body داده بشه، این رنگ‌ها جایگزین رنگ‌های قبلی می‌شن */
+.dark-theme {
+  --bg-primary: #000000; /* یک مشکی ملایم و مدرن به جای سفید */
+  --text-color: #ffffff; /* متن‌ها سفید بشن */
+  --card-background: #1e1e1e; /* کارت‌ها کمی روشن‌تر از پس‌زمینه تا دیده بشن */
+  --border-color: #111111;
+}
+
+/* استایل دکمه تغییر تم */
+#theme-btn {
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: 0.3s ease-in-out;
+  transition:
+    transform 0.5s ease-in-out,
+    color 0.3s ease-in-out;
+}
+#theme-btn:hover {
+  color: var(--primary-color); /* موقع هاور زرد بشه */
+}
+
+body.dark-theme #theme-btn {
+  transform: rotate(360deg);
+}
+
+html {
+  font-size: 100%; /* تنظیم اندازه پایه فونت به 16 پیکسل (1rem = 16px) */
+  scroll-behavior: smooth; /* این خط باعث میشه وقتی روی لینک‌های منو کلیک می‌کنیم، صفحه به صورت نرم و روان به بخش مورد نظر اسکرول بشه */
+}
+
+/* ۲. ریست کردن استایل‌های پیش‌فرض مرورگر */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* باعث میشه پدینگ‌ها و حاشیه‌ها، عرض المان رو بهم نریزن */
+}
+
+/* ۳. تنظیمات پایه برای کل بدنه سایت */
+body {
+  background: var(
+    --bg-primary
+  ); /* استفاده از متغیر رنگ پس‌زمینه که بالا ساختیم */
+  color: var(--text-color); /* استفاده از متغیر رنگ متن */
+  font-family: "Raleway", sans-serif; /* اعمال فونتی که خط اول وارد کردیم */
+  line-height: 1.5; /* فاصله استاندارد بین خطوط متن برای خوانایی بهتر */
+}
+
+#hero {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 4000; /* مرورگر به طور پیش‌فرض روی 800 یا bolder تنظیم می‌کنه که ما اینجا ملایمش می‌کنیم */
+}
+
+.header-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ۴. حذف استایل‌های مزاحم پیش‌فرض */
+ul {
+  list-style: none; /* حذف نقطه‌های کنار تمام لیست‌های سایت */
+}
+
+a {
+  text-decoration: none; /* حذف خط زیر تمام لینک‌های سایت */
+  color: var(--text-color);
+}
+
+/* =========================================
+   بخش هدر و ناوبری (Navbar)
+========================================= */
+
+/* ۱. چسباندن هدر به بالای صفحه */
+.navbar {
+  position: fixed; /* ثابت کردن هدر */
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20; /* این عدد باعث میشه هدر همیشه "روی" بقیه المان‌های سایت قرار بگیره و زیرشون نره */
+  background: var(
+    --bg-primary
+  ); /* دادن رنگ پس‌زمینه تا المان‌های زیرین از پشت منو دیده نشن */
+}
+
+/* ۲. تنظیمات ظرف داخلی هدر (جدا کردن لوگو و لیست منو) */
+.navbar .container {
+  display: flex;
+  align-items: center; /* تراز کردن المان‌ها در مرکز محور عمودی */
+  justify-content: space-between; /* هل دادن لوگو به منتهی‌الیه چپ و منو به منتهی‌الیه راست */
+  height: 80px; /* یک ارتفاع ثابت و استاندارد برای هدر */
+  width: 100%;
+}
+
+/* تنظیمات آیکون همبرگر */
+.hamburger {
+  display: none; /* در حالت عادی (دسکتاپ) کاملاً مخفی است */
+  cursor: pointer;
+}
+
+/* ساخت خط‌های همبرگر */
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: var(--text-color);
+  transition: all 0.3s ease-in-out; /* برای انیمیشن تبدیل شدن به ضربدر در آینده */
+}
+
+/* ۳. افقی کردن لیست گزینه‌های منو */
+.navbar .nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+/* ۴. استایل و فاصله‌گذاری لینک‌های منو */
+.navbar .nav-link {
+  margin: 0 1rem; /* صفر برای بالا/پایین، 1rem (حدود 16 پیکسل) برای چپ/راست */
+  font-size: 0.75rem;
+  font-weight: 600; /* ضخیم کردن متن لینک‌ها */
+  text-transform: uppercase; /* تبدیل متن لینک‌ها به حروف بزرگ */
+  letter-spacing: 1px; /* کمی فاصله دادن بین حروف لینک‌ها برای زیبایی بیشتر */
+}
+
+/* =========================================
+   استایل‌های اختصاصی بخش Hero
+========================================= */
+
+/* دایره‌ای کردن عکس و اعمال انیمیشن */
+
+.profile-image {
+  width: 150px;
+  border-radius: 50%; /* با دادن شعاع 50 درصد، عکس مربع تبدیل به یک دایره کامل می‌شه */
+  animation: bounce 1s infinite alternate; /* اجرای انیمیشنی به اسم bounce به صورت بی‌نهایت */
+}
+
+/* تعریف فریم‌های انیمیشن (Keyframes) */
+@keyframes bounce {
+  from {
+    transform: translateY(0px); /* نقطه شروع: سر جای خودش */
+  }
+  to {
+    transform: translateY(-10px); /* نقطه پایان: 10 پیکسل حرکت به سمت بالا */
+  }
+}
+
+.division {
+  width: 100%;
+  height: 2px;
+  background-color: var(--border-color);
+  margin: 5.5rem 0;
+}
+
+/* =========================================
+   بخش پروژه‌ها (Projects)
+========================================= */
+/* تنظیمات کلی بخش پروژه‌ها */
+
+#projects {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto 5rem; /* ایجاد فاصله از بالا و پایین صفحه */
+  scroll-margin-top: 5rem;
+}
+
+/* شبکه (Grid) کارت‌ها */
+.project {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* این خط قلب گرید است: می‌گیم ۳ ستون بساز که هر کدوم 1fr (یک کسر مساوی از فضای موجود) باشن */
+  grid-auto-rows: minmax(
+    250px,
+    auto
+  ); /* حداقل ارتفاع هر ردیف ۲۵۰ پیکسل باشه، اما اگر محتوا زیاد شد اتوماتیک (auto) کش بیاد */
+  gap: 1rem; /* فاصله بین کارت‌ها در سطر و ستون */
+}
+
+/* ۱. تنظیمات مربوط به دکمه See More و فاصله‌گذاری فلش */
+#projects .btn {
+  align-self: center; /* وسط‌چین کردن دکمه در کانتینر فلکس */
+  margin: 2rem 0;
+}
+
+.fas.fa-arrow-right {
+  margin-left: 0.5rem; /* ایجاد یک فاصله کوچک بین کلمه See More و فلش سمت راست */
+  font-size: 0.9rem;
+}
+
+/* ۲. پنهان کردن اطلاعات پروژه در حالت عادی */
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  opacity: 0; /* جادوی اصلی: در حالت عادی اطلاعات کاملاً شفاف و مخفی هستند */
+  position: relative;
+  transition: 0.5s ease-in-out; /* انیمیشن نرم برای ظاهر شدن اطلاعات */
+}
+
+/* ۳. موقعیت‌دهی به متن‌های داخل کارت */
+.project-bio {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  top: 160px; /* هل دادن متن به سمت پایین کارت */
+  left: 10px;
+  font-size: 0.8rem;
+}
+
+/* ۴. رنگ آیکون‌های داخل کارت */
+.card a {
+  color: #ffffff;
+  transition: 0.25s ease-in-out;
+  font-size: 1.1rem;
+  margin-right: 0.3rem;
+}
+
+/* تغییر رنگ آیکون‌ها وقتی موس روی لینک‌ها می‌رود */
+.card a:hover {
+  color: var(--primary-color);
+}
+
+/* =========================================
+   بخش فوتر (Footer)
+========================================= */
+#footer {
+  background: #111111; /* یک رنگ بسیار تیره برای پس‌زمینه فوتر */
+}
+
+/* تنظیمات کانتینر داخل فوتر */
+#footer .container {
+  display: flex;
+  flex-direction: column; /* چیدن المان‌ها زیر هم */
+  align-items: center; /* وسط‌چین کردن المان‌ها */
+  justify-content: center;
+  color: #ffffff; /* رنگ متن‌های فوتر سفید باشه */
+  min-height: 160px;
+  text-align: center;
+}
+
+/* استایل لینک‌های داخل فوتر (مثل ایمیل) */
+#footer a {
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+/* افکت هاور برای لینک‌های فوتر: وقتی موس رفت روشون کمی محو بشن */
+#footer a:hover {
+  opacity: 0.6;
+}
+
+/* فاصله‌گذاری برای ظرف شبکه‌های اجتماعی */
+#footer .social {
+  margin: 1.5rem 0;
+}
+
+/* بزرگ‌تر کردن و فاصله دادن به آیکون‌های شبکه‌های اجتماعی */
+#footer .social a {
+  margin: 0 0.8rem;
+  font-size: 1.5rem; /* چون از FontAwesome استفاده کردیم، با font-size بزرگ می‌شن */
+}
+
+#footer p {
+  font-size: 0.8rem;
+  color: #cccccc; /* رنگ کپی‌رایت کمی خاکستری‌تر باشه تا خیلی تو چشم نزنه */
+}
+
+/* =========================================
+   ریسپانسیو (Responsive) - موبایل و تبلت
+========================================= */
+
+/* شرط اول: برای مانیتورهای کوچکتر از 1000 پیکسل (مثل تبلت‌ها) */
+@media (max-width: 1000px) {
+  /* به جای 3 ستون، کارت‌ها رو تو 2 ستون بچین تا فضای بیشتری داشته باشن */
+  .project {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* ۱. همبرگر رو نمایش بده */
+  .hamburger {
+    display: block;
+  }
+  /* ۲. منوی اصلی رو از حالت افقی دربیار و بنداز بیرون کادر */
+  .navbar .nav-menu {
+    position: fixed;
+    right: -100%; /* جادوی CSS: منو رو ۱۰۰ درصد می‌فرسته سمت چپ بیرون از مانیتور! */
+    top: 90px; /* از زیر هدر شروع بشه */
+    gap: 0;
+    flex-direction: column; /* گزینه‌ها رو زیر هم بچین */
+    align-items: flex-start; /* گزینه‌ها رو به سمت چپ بچسبون */ /* متن‌ها رو به سمت چپ منو تراز می‌کنه */
+    background: var(--bg-primary);
+    /* تنظیمات شکلِ کارت */
+    width: 260px; /* عرض ثابت به جای کل صفحه */
+    padding: 2rem; /* فاصله داخلی بیشتر برای راحتی تاچ کردن */ /* فضای خالی داخل کارت */
+    border-radius: 15px; /* گوشه‌های گرد برای زیبایی بیشتر */
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* سایه عمیق‌تر برای جدا شدن از پس‌زمینه */
+    /* انیمیشن ورود از سمت راست */
+    transition: right 0.2s ease-in-out; /* انیمیشن نرم برای باز شدن منو */
+  }
+
+  /* ۳. فاصله‌گذاری گزینه‌های منو در حالت موبایل */
+  .navbar .nav-link {
+    margin: 1rem 0; /* فاصله عمودی بیشتر برای راحتی تاچ کردن با انگشت */
+    display: block;
+  }
+  /* ۴. کلاسی که بعداً با جاوااسکریپت به منو می‌دیم تا برگرده تو صفحه */
+  .navbar .nav-menu.active {
+    right: 20px; /* وقتی کلاس active رو گرفت، منو میاد داخل صفحه و ۲۰ پیکسل از سمت راست فاصله می‌گیره */
+  }
+  /* کشیده کردن دکمه رزومه در منوی موبایل */
+  .navbar .nav-menu .btn {
+    width: 100%;
+    text-align: center; /* متن دکمه رو وسط‌چین می‌کنه */
+    margin-top: 1rem; /* یک فاصله کوچک برای المان‌های داخل کانتینر */
+  }
+  /* انیمیشن تبدیل همبرگر به ضربدر */
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0; /* خط وسطی همبرگر رو محو می‌کنیم */
+  }
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg); /* خط اول رو می‌چرخونیم و به پایین می‌فرستیم */ /* خط بالایی میاد پایین و ۴۵ درجه می‌چرخه */
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg); /* خط سوم رو می‌چرخونیم و به بالا می‌فرستیم */ /* خط پایینی میاد بالا و ۴۵ درجه در جهت مخالف می‌چرخه */
+  }
+  #theme-btn {
+    margin: 1.5rem 0;
+  }
+}
+
+/* شرط دوم: برای گوشی‌های موبایل (کوچکتر از 600 پیکسل) */
+/* شرط دوم: برای گوشی‌های موبایل (کوچکتر از 600 پیکسل) */
+@media (max-width: 600px) {
+  /* ۱. گرید پروژه‌ها */
+  .project {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  /* ۲. دکمه‌ها */
+  .btn {
+    border-radius: 5px;
+  }
+  .navbar .nav-menu .btn {
+    border-radius: 30px;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* ۳. حل مشکل رفتن زیر منو (افزایش فاصله به 6.5rem) */
+  .header-container {
+    margin-top: 7rem;
+    text-align: center;
+    
+  }
+
+  /* ۴. کوچک کردن عکس پروفایل برای باز شدن فضای صفحه */
+  /* .profile-image {
+    width: 110px; 
+  } */
+
+  .header-container h1 {
+    font-size: 1.8rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ۵. فشرده‌سازی تیترهای اصلی */
+  .content-text {
+    margin: 0.5rem 0;
+  }
+
+  .content-text h2 {
+    font-size: 2.6rem;
+    line-height: 1;
+    letter-spacing: -1px;
+    margin: 0;
+  }
+
+  /* ۶. جادوی هرم معکوس و کم کردن فاصله پاراگراف */
+  .content-text p {
+    font-size: 0.95rem;
+    /* مارجین بالا رو به 0.4rem کاهش دادیم تا به تیتر بچسبه */
+    margin: 0.4rem auto 0;
+    /* این دستور باعث شکستن خطوط دقیقاً مثل طرح اصلی می‌شه */
+    max-width: 310px;
+    padding: 0;
+  }
+
+  /* ۷. دکمه تماس تمام‌عرض */
+  .header-container .btn-secondary {
+    display: block;
+    width: 80%;
+    padding: 0.8rem 0;
+    /* به جای #000000 ثابت، از متغیرهای هوشمند استفاده می‌کنیم */
+    background-color: var(--text-color);
+    color: var(
+      --bg-primary
+    ); /* رنگ متن رو هم برعکس می‌کنیم تا همیشه خوانا باشه */
+    border-radius: 6px;
+    margin-top: 1.5rem;
+  }
+
+  /* بازگرداندن فاصله برای تیتر بخش پروژه‌ها در موبایل */
+  #projects .content-text {
+    margin-bottom: 2rem; /* ایجاد فضای تنفس بین تیتر "Projects" و اولین کارت */
+  }
+
+  /* تنظیم فونت تیتر Projects تو موبایل تا خیلی غول‌پیکر نباشه */
+  #projects .content-text h2 {
+    font-size: 2.2rem;
+  }
+
+  #projects .btn-secondary{
+    border-radius: 30px;
+  }
+}
