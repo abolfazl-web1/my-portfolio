@@ -2,7 +2,7 @@
 
 A modern, fully responsive, and pixel-perfect personal portfolio website built from scratch. This project showcases my skills in Front-End development, focusing on clean UI/UX, fluid typography, and dynamic features like a fully functional Dark/Light mode.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-View_Site-success?style=for-the-badge)](https://yourusername.github.io/my-portfolio)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-View_Site-success?style=for-the-badge)](https://abolfazl-web1.github.io/my-portfolio/)
 
 ---
 
